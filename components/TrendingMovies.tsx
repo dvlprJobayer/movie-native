@@ -15,6 +15,7 @@ const TrendingMovies = ({data}: TrendingMoviesProps) => {
             <Carousel
                 data={data}
                 renderItem={({item}) => <MovieCard item={item} />}
+                firstItem={1}
                 inactiveSlideOpacity={0.6}
                 sliderWidth={width}
                 itemWidth={width * 0.62}

@@ -5,9 +5,12 @@ import {Bars3CenterLeftIcon, MagnifyingGlassIcon} from "react-native-heroicons/o
 import TrendingMovies from "../components/TrendingMovies";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import MovieList from "../components/MovieList";
 
 const HomeScreen = () => {
     const [trending, setTrending] = useState([1, 2, 3]);
+    const [upcoming, setUpcoming] = useState([1, 2, 3]);
+    const [topRated, setTopRated] = useState([1, 2, 3]);
 
     return (
         <SafeAreaView style={tw`flex-1 bg-neutral-800`}>
@@ -27,9 +30,16 @@ const HomeScreen = () => {
             {/* Movies Section */}
             <ScrollView
                 contentContainerStyle={{paddingBottom: 10}}
+                showsVerticalScrollIndicator={false}
             >
                 {/* Trending Movies Carousel */}
                 <TrendingMovies data={trending} />
+
+                {/* Upcoming Movies Row */}
+                <MovieList title="Upcoming" data={upcoming} />
+                
+                {/* Upcoming Movies Row */}
+                <MovieList title="Top Rated" data={topRated} />
             </ScrollView>
         </SafeAreaView>
     );
