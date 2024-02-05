@@ -1,24 +1,35 @@
 import { Dimensions, Image, Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import tw from "twrnc";
 import { styles } from "../theme";
+import { useNavigation } from "@react-navigation/native";
 
 interface MovieListProps {
     title: string;
     data: number[];
+    hideSeeAll?: boolean;
 }
+
+type Navigation = {
+    push: (routeName: string, params?: number) => void;
+};
 
 const {height, width} = Dimensions.get("window");
 
-const MovieList = ({title, data}: MovieListProps) => {
+const MovieList = ({title, data, hideSeeAll}: MovieListProps) => {
+    const navigation = useNavigation<Navigation>();
     const movieName = "Ant-Man and the Wasp: Quantumania";
 
     return (
         <View style={tw`mb-8 gap-y-4`}>
             <View style={tw`mx-4 flex-row justify-between items-center`}>
                 <Text style={tw`text-xl text-white`}>{title}</Text>
-                <TouchableOpacity>
-                    <Text style={[styles.text, tw`text-lg`]}>See all</Text>
-                </TouchableOpacity>
+                {
+                    !hideSeeAll && (
+                        <TouchableOpacity>
+                            <Text style={[styles.text, tw`text-lg`]}>See all</Text>
+                        </TouchableOpacity>
+                    )
+                }
             </View>
 
             {/* Movie Row */}
@@ -31,6 +42,7 @@ const MovieList = ({title, data}: MovieListProps) => {
                     data.map((item, idx) => (
                         <Pressable
                             key={idx}
+                            onPress={() => navigation.push("Movie", item)}
                         >
                             <View style={tw`gap-y-1 mr-4`}>
                                 <Image

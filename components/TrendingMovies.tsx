@@ -3,9 +3,15 @@ import { Dimensions, Image, Pressable, Text, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import tw from "twrnc";
 
+// Props Type
 interface TrendingMoviesProps {
     data: number[]
 }
+
+// Navigation Type
+type Navigation = {
+    navigate: (routeName: string, params?: number) => void;
+};
 
 const {width, height} = Dimensions.get("window");
 
@@ -29,7 +35,7 @@ const TrendingMovies = ({data}: TrendingMoviesProps) => {
 export default TrendingMovies;
 
 const MovieCard = ({item}: {item: number}) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<Navigation>();
 
     const handleMovieScreen = () => {
         navigation.navigate("Movie", item);

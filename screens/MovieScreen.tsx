@@ -7,12 +7,14 @@ import { styles, theme } from "../theme";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Cast from "../components/Cast";
+import MovieList from "../components/MovieList";
 
 const MovieScreen = () => {
     const {params: movie} = useRoute();
     const navigation = useNavigation();
     const [isFavorite, setIsFavorite] = useState(false);
     const [cast, setCast] = useState([1, 2, 3, 4, 5]);
+    const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4, 5]);
     const {width, height} = Dimensions.get("window");
     const movieName = "Ant-Man and the Wasp: Quantumania";
 
@@ -80,6 +82,9 @@ const MovieScreen = () => {
 
             {/* Cast Component */}
             <Cast onChangeScreen={navigation.navigate} cast={cast} />
+
+            {/* Similar Movies */}
+            <MovieList title="Similar Movies" data={similarMovies} hideSeeAll={true} />
         </ScrollView>
     );
 }
