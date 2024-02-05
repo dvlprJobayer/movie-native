@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions, Image, Pressable, Text, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import tw from "twrnc";
@@ -28,8 +29,14 @@ const TrendingMovies = ({data}: TrendingMoviesProps) => {
 export default TrendingMovies;
 
 const MovieCard = ({item}: {item: number}) => {
+    const navigation = useNavigation();
+
+    const handleMovieScreen = () => {
+        navigation.navigate("Movie", item);
+    }
+
     return (
-        <Pressable>
+        <Pressable onPress={handleMovieScreen}>
             <Image 
                 source={require("../assets/images/moviePoster1.png")} 
                 style={[{width: width * 0.6, height: height * 0.4}, tw`rounded-3xl`]}
